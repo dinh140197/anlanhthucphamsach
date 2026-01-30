@@ -1,0 +1,630 @@
+<!DOCTYPE html><html lang="vi"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ĂN LÀNH - AN LÀNH | Thực phẩm sạch từ Núi Thành, Đà Nẵng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ==== RESET & BASIC STYLES ==== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9fdf9;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* ==== HEADER & NAVIGATION ==== */
+        header {
+            background-color: #2a7d2e; /* Màu xanh lá đậm */
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .logo i {
+            color: #ffd166;
+        }
+        .logo span:first-child {
+            color: #ffd166; /* Vàng cho "ĂN LÀNH" */
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+        nav a:hover, nav a.active {
+            border-bottom-color: #ffd166;
+            color: #ffd166;
+        }
+        .cart-icon {
+            position: relative;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #e63946;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ==== HERO SECTION ==== */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 5rem 1rem;
+            margin-bottom: 3rem;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #ffd166; /* Màu vàng */
+            color: #2a7d2e; /* Màu xanh đậm */
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .btn:hover {
+            background-color: #f9c74f;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+        }
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #ffd166;
+            color: #ffd166;
+            margin-left: 1rem;
+        }
+        .btn-outline:hover {
+            background-color: #ffd166;
+            color: #2a7d2e;
+        }
+
+        /* ==== PRODUCTS SECTION ==== */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #2a7d2e;
+            font-size: 2.2rem;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #ffd166;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        .product-img {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+        .product-info {
+            padding: 1.5rem;
+        }
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+            color: #2a7d2e;
+        }
+        .product-source {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #e63946;
+            margin: 0.5rem 0;
+        }
+        .product-tag {
+            display: inline-block;
+            background-color: #c7f9cc;
+            color: #2a7d2e;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+
+        /* ==== STORY SECTION ==== */
+        .story {
+            background-color: #e9f5e9;
+            padding: 4rem 0;
+            margin: 3rem 0;
+        }
+        .story-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        .story-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        .story-text h2 {
+            color: #2a7d2e;
+            margin-bottom: 1.5rem;
+        }
+        .story-map {
+            flex: 1;
+            min-width: 300px;
+            background-color: #a8dadc;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .story-map i {
+            font-size: 3rem;
+            color: #2a7d2e;
+            margin-bottom: 1rem;
+        }
+        .story-map h3 {
+            margin-bottom: 1rem;
+        }
+
+        /* ==== FOOTER ==== */
+        footer {
+            background-color: #1d5c20;
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .footer-logo span:first-child {
+            color: #ffd166;
+        }
+        .footer-links h4, .footer-contact h4 {
+            margin-bottom: 1.2rem;
+            color: #ffd166;
+        }
+        .footer-links ul {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: #ffd166;
+        }
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        .social-icons a:hover {
+            background-color: #ffd166;
+            color: #2a7d2e;
+            transform: translateY(-3px);
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* ==== UTILITY CLASSES ==== */
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 2rem; }
+        .mb-2 { margin-bottom: 2rem; }
+
+        /* ==== MODAL (POPUP) ==== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: modalFade 0.3s;
+        }
+        @keyframes modalFade {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #888;
+        }
+        .close-modal:hover {
+            color: #333;
+        }
+        .modal-header {
+            margin-bottom: 1rem;
+            color: #2a7d2e;
+        }
+        .modal-img {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        .qr-code {
+            width: 120px;
+            height: 120px;
+            background-color: #f0f0f0;
+            margin: 1rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: #666;
+            border: 2px dashed #ccc;
+        }
+    </style></head><body>
+    <!-- HEADER -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                <span>ĂN LÀNH</span> - <span>AN LÀNH</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Trang Chủ</a></li>
+                    <li><a href="#products">Sản Phẩm</a></li>
+                    <li><a href="#story">Câu Chuyện</a></li>
+                    <li><a href="#about">Về Chúng Tôi</a></li>
+                    <li><a href="#contact">Liên Hệ</a></li>
+                </ul>
+            </nav>
+            <div class="cart-icon" onclick="openCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">3</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <h1>Từ Núi Thành Đến Bàn Ăn Của Bạn</h1>
+            <p>Kết nối trực tiếp với những người nông dân chân chất tại vùng quê Núi Thành, Đà Nẵng. Mang đến cho gia đình bạn những thực phẩm sạch, thuần khiết nhất với nguồn gốc minh bạch từng bước.</p>
+            <a href="#products" class="btn">Mua Sắm Ngay</a>
+            <a href="#story" class="btn btn-outline">Khám Phá Câu Chuyện</a>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+        <!-- PRODUCTS -->
+        <section id="products">
+            <h2 class="section-title">Sản Phẩm Tiêu Biểu</h2>
+            <div class="products-grid">
+                <!-- Sản phẩm 1 -->
+                <div class="product-card" onclick="openProductModal('Rau Cải Xanh Hữu Cơ', 'Nông hộ Nguyễn Văn A, Thôn Phú Thọ, Núi Thành', 35000, 'rau')">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1592924357228-91a4daadcfea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="product-info">
+                        <h3>Rau Cải Xanh Hữu Cơ</h3>
+                        <small class="product-source">Nông hộ Nguyễn Văn A, Núi Thành</small>
+                        <p class="product-price">35,000đ / 500g</p>
+                        <span class="product-tag">HỮU CƠ</span>
+                        <span class="product-tag">THEO MÙA</span>
+                    </div>
+                </div>
+                <!-- Sản phẩm 2 -->
+                <div class="product-card" onclick="openProductModal('Tôm Sú Biển Sạch', 'Hợp tác xã Thủy sản Bình Minh, Núi Thành', 180000, 'tom')">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1559737558-2f5a35f4523b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="product-info">
+                        <h3>Tôm Sú Biển Sạch</h3>
+                        <small class="product-source">HTX Thủy sản Bình Minh, Núi Thành</small>
+                        <p class="product-price">180,000đ / 1kg</p>
+                        <span class="product-tag">HẢI SẢN</span>
+                        <span class="product-tag">TƯƠI SỐNG</span>
+                    </div>
+                </div>
+                <!-- Sản phẩm 3 -->
+                <div class="product-card" onclick="openProductModal('Gạo Lứt Huyết Rồng', 'Hợp tác xã Nông nghiệp An Lành, Núi Thành', 45000, 'gao')">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="product-info">
+                        <h3>Gạo Lứt Huyết Rồng</h3>
+                        <small class="product-source">HTX Nông nghiệp An Lành, Núi Thành</small>
+                        <p class="product-price">45,000đ / 1kg</p>
+                        <span class="product-tag">NGUYÊN CÁM</span>
+                        <span class="product-tag">DINH DƯỠNG</span>
+                    </div>
+                </div>
+                <!-- Sản phẩm 4 -->
+                <div class="product-card" onclick="openProductModal('Chuối Xiêm Luộc', 'Vườn nhà bác Hai Lúa, Núi Thành', 25000, 'chuoi')">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1603833665858-e61d17a86224?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="product-info">
+                        <h3>Chuối Xiêm Luộc</h3>
+                        <small class="product-source">Vườn nhà bác Hai Lúa, Núi Thành</small>
+                        <p class="product-price">25,000đ / nải</p>
+                        <span class="product-tag">TRÁI CÂY</span>
+                        <span class="product-tag">ĐẶC SẢN</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="#" class="btn">Xem Tất Cả Sản Phẩm</a>
+            </div>
+        </section>
+
+        <!-- STORY SECTION -->
+        <section id="story" class="story">
+            <div class="container story-content">
+                <div class="story-text">
+                    <h2>Hành Trình "An Lành" Của Chúng Tôi</h2>
+                    <p>Chúng tôi bắt đầu từ tình yêu với mảnh đất Núi Thành - nơi có những cánh đồng rau xanh mướt, những đầm tôm cá trù phú và những con người cần cù, chất phác.</p>
+                    <p>"Ăn Lành - An Lành" ra đời với sứ mệnh tạo nên một cầu nối trực tiếp, minh bạch giữa người nông dân chân chất và người tiêu dùng thành thị. Mỗi sản phẩm không chỉ là thực phẩm, mà còn là một câu chuyện, một sự bảo đảm về sức khỏe và sự an tâm cho gia đình bạn.</p>
+                    <p>Chúng tôi cam kết: <strong>Nguồn gốc rõ ràng - Chất lượng thuần khiết - Giá trị cộng đồng.</strong></p>
+                </div>
+                <div class="story-map">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3>Nguồn Gốc: Núi Thành, Đà Nẵng</h3>
+                    <p>Vùng đất với điều kiện tự nhiên lý tưởng cho nông nghiệp sạch và thủy sản.</p>
+                    <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 5px; color: #333;">
+                        <small><i class="fas fa-tractor"></i> <strong>Trồng trọt truyền thống</strong></small><br>
+                        <small><i class="fas fa-fish"></i> <strong>Chăn nuôi hải sản sạch</strong></small>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <span>ĂN LÀNH</span> - <span>AN LÀNH</span>
+                    </div>
+                    <p>Kết nối thiên nhiên Núi Thành với bữa ăn an lành của mọi nhà.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Liên Kết Nhanh</h4>
+                    <ul>
+                        <li><a href="#products">Sản Phẩm</a></li>
+                        <li><a href="#story">Câu Chuyện</a></li>
+                        <li><a href="#">Chính Sách Giao Hàng</a></li>
+                        <li><a href="#">Chính Sách Đổi Trả</a></li>
+                        <li><a href="#">Dành Cho Đối Tác B2B</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Liên Hệ</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Kho hàng: 123 Đường Hoàng Diệu, Q. Hải Châu, Đà Nẵng</p>
+                    <p><i class="fas fa-phone"></i> Hotline: 0905 123 456</p>
+                    <p><i class="fas fa-envelope"></i> Email: cskh@anlanh-anlanh.vn</p>
+                    <p><i class="fas fa-clock"></i> Giờ làm việc: 7:00 - 20:00 (T2 - CN)</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 ĂN LÀNH - AN LÀNH. Dự án Điện tử Thương mại | Thiết kế cho mục đích học thuật.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL FOR PRODUCT DETAIL -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3 class="modal-header" id="modalTitle">Rau Cải Xanh Hữu Cơ</h3>
+            <div class="modal-img" id="modalImg"></div>
+            <p><strong>Nguồn gốc:</strong> <span id="modalSource">Nông hộ Nguyễn Văn A, Thôn Phú Thọ, Núi Thành</span></p>
+            <p><strong>Phương pháp canh tác:</strong> Canh tác hữu cơ, không sử dụng thuốc trừ sâu hóa học.</p>
+            <p><strong>Ngày thu hoạch:</strong> 15/10/2023</p>
+            <p><strong>Giá:</strong> <span id="modalPrice" style="color: #e63946; font-weight: bold;">35,000đ</span></p>
+
+            <div class="qr-code">
+                [MÃ QR TRUY XUẤT]<br>Quét để xem chi tiết nông hộ
+            </div>
+
+            <p style="margin-top: 1rem;"><strong>Hành trình sản phẩm:</strong> Núi Thành -> Kiểm định -> Đóng gói -> Giao đến tay bạn trong vòng 12h.</p>
+
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <button class="btn" onclick="addToCart()"><i class="fas fa-cart-plus"></i> Thêm Vào Giỏ Hàng</button>
+                <button class="btn btn-outline" onclick="closeModal()">Tiếp Tục Mua Sắm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        // Mở Modal chi tiết sản phẩm
+        function openProductModal(name, source, price, imgType) {
+            document.getElementById('modalTitle').textContent = name;
+            document.getElementById('modalSource').textContent = source;
+            document.getElementById('modalPrice').textContent = new Intl.NumberFormat('vi-VN').format(price) + 'đ';
+
+            // Đặt ảnh nền cho modal dựa trên loại sản phẩm
+            const imgDiv = document.getElementById('modalImg');
+            const images = {
+                'rau': 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                'tom': 'https://images.unsplash.com/photo-1559737558-2f5a35f4523b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                'gao': 'https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+                'chuoi': 'https://images.unsplash.com/photo-1603833665858-e61d17a86224?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            };
+            imgDiv.style.backgroundImage = `url('${images[imgType] || images['rau']}')`;
+
+            document.getElementById('productModal').style.display = 'flex';
+        }
+
+        // Đóng Modal
+        function closeModal() {
+            document.getElementById('productModal').style.display = 'none';
+        }
+
+        // Mở giỏ hàng (demo)
+        function openCart() {
+            alert('Chức năng giỏ hàng đang trong giai đoạn demo. Bạn có 3 sản phẩm trong giỏ!');
+        }
+
+        // Thêm vào giỏ hàng
+        function addToCart() {
+            const productName = document.getElementById('modalTitle').textContent;
+            alert(`Đã thêm "${productName}" vào giỏ hàng!`);
+            closeModal();
+            // Tăng số lượng trên icon giỏ hàng (demo)
+            const countSpan = document.querySelector('.cart-count');
+            let count = parseInt(countSpan.textContent);
+            countSpan.textContent = count + 1;
+        }
+
+        // Đóng modal nếu click ra ngoài
+        window.onclick = function(event) {
+            const modal = document.getElementById('productModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Highlight menu khi scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a');
+
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script></body></html>
+
